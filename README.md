@@ -77,6 +77,8 @@ node scripts/check.mjs      # 自检：模块可解析、清单声明的路径�
 | `bundle-entry` | 目标已在 `dsh.profile.bundles` 里，重复安装可能重复挂载 | warn |
 | `already-installed` / `version-change` | 同版本重复安装；或将升级/降级某插件（附回退目标） | warn |
 | `engines-dsh-missing` / `peer-absent` / `row-check-skipped` / `compat-unlisted` | 无法判定或无法比对的信息 | info |
+| `package-size` | 解包后体积与文件数（来自 registry 的 `dist.unpackedSize` / `fileCount`），看一眼就知道装完会占多少磁盘 | info |
+| `package-stale` | 该版本的发布时间（来自 registry 的 `time` 表），用来判断这个包是不是已经停更 | info |
 
 版本比较按**版本序**（等价 `includePrerelease`）：插件写 `>=0.1.2-rc.1` 时，`0.1.5-rc.2` 视为满足——严格 node-semver 会拒绝这一对，那会把整个市场都误报成不兼容。真正要求更新版本（`>=0.2.0`）时照旧报警。
 
@@ -109,7 +111,7 @@ dsh-plugin-guard history [<插件>]           # 版本历史与上次成功启�
 dsh-plugin-guard rollback <插件>[@<版本>]   # 省略版本 = 上次成功启动的版本；先备份再经官方 CLI 装回
 dsh-plugin-guard restore [<备份id>|latest]  # 把清单与补丁还原到某次备份（默认最近一次）
 dsh-plugin-guard backup                     # 只备份 profile 的清单与补丁
-dsh-plugin-guard backups                    # 列出备份（id / 类型 / 时间 / 原因）
+dsh-plugin-guard backups                    # 列出备份（id / 类型 / 占用空间 / 时间 / 原因，末行给总量）
 dsh-plugin-guard backups delete <id|latest>  # 删除某一份备份
 dsh-plugin-guard skips                      # 被强行继续的警告
 ```

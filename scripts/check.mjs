@@ -68,7 +68,12 @@ const render = run([join(root, 'test', 'tab-render-check.mjs'), join(root, 'lib'
 if (!render.ok) failures.push(`the client bundle failed its render check:\n${render.output.trim()}`)
 else notes.push(render.output.trim().split('\n').at(-1) ?? 'render check ok')
 
-// 4) the row this plugin inserts must name this package: the profile resolves it
+// 4) the report extras (package size / release age / backup usage) still behave
+const extras = run([join(root, 'test', 'report-extras.mjs')])
+if (!extras.ok) failures.push(`the report-extras test failed:\n${extras.output.trim()}`)
+else notes.push(extras.output.trim().split('\n').at(-1) ?? 'report extras ok')
+
+// 5) the row this plugin inserts must name this package: the profile resolves it
 // by that string, so a mismatch means nobody who installs it can boot.
 const patch = readFileSync(join(root, 'cordis.patch.yml'), 'utf8')
 if (!patch.includes(`name: '${String(manifest.name)}'`)) {
