@@ -1,0 +1,3 @@
+# 干净的 profile 补丁层（没有任何挂载行）。
+# 用法：Copy-Item drill\clean-cordis.patch.yml ..\profiles\web\cordis.patch.yml -Force
+[]

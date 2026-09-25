@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "target": "ES2023",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "lib": ["ES2023", "DOM"],
+    "allowJs": true,
+    "checkJs": false,
+    "noEmit": true,
+    "resolveJsonModule": true,
+    "types": ["node"]
+  },
+  "include": ["lib/**/*.js", "lib/**/*.mjs", "test/**/*.mjs", "scripts/**/*.mjs"],
+  "exclude": ["node_modules", "examples/bad-import-fixture"]
+}

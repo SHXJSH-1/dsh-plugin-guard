@@ -1,0 +1,30 @@
+# dependencies
+node_modules/
+
+# build output (this package has no build step; listed for consumers who add one)
+dist/
+build/
+out/
+*.tsbuildinfo
+
+# environment: never commit real values, keep the template
+.env
+.env.*
+!.env.example
+
+# logs
+*.log
+logs/
+npm-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# editors and OS cruft
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# this plugin's own runtime data, if you ever point it at the repo
+plugin-guard/
+*.tgz

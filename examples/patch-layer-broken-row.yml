@@ -1,0 +1,6 @@
+# 演练 E 用：把这一行挂进 profile 补丁层，启动就会失败（引用的包不存在）。
+# 用法：Copy-Item drill\broken-row-cordis.patch.yml ..\profiles\web\cordis.patch.yml -Force
+# 恢复：Copy-Item drill\clean-cordis.patch.yml ..\profiles\web\cordis.patch.yml -Force
+- insert:
+    - id: boot-probe
+      name: 'definitely-not-installed-pkg'

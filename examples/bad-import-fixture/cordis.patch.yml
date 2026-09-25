@@ -1,0 +1,6 @@
+# Drill F: mounting this row makes the loader import lib/index.js, which imports
+# a file that does not exist — a start that gets past compose (so cordis.yml IS
+# rewritten) and then dies inside the loader.
+- insert:
+    - id: bad-import-fixture
+      name: 'dsh-bad-import-fixture'

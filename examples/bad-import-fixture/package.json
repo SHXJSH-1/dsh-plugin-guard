@@ -1,0 +1,19 @@
+{
+  "name": "dsh-bad-import-fixture",
+  "version": "0.0.1",
+  "description": "Drill F fixture: its entry imports a file that does not exist, so the loader fails AFTER compose (cordis.yml is written) and no static audit can see it. Only the watchdog's start-attempt signal catches this class.",
+  "type": "module",
+  "main": "lib/index.js",
+  "exports": {
+    ".": "./lib/index.js"
+  },
+  "dsh": {
+    "engines": {
+      "dsh": ">=0.1.5-rc.1"
+    },
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  },
+  "license": "MIT"
+}
