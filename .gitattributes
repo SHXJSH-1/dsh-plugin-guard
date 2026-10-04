@@ -1,0 +1,4 @@
+﻿# This project ships plain JS/YAML/Markdown and has no build step, so the only
+# thing that could differ between platforms is the line ending. Pin it: the
+# repository stores LF, everyone checks out LF.
+* text=auto eol=lf

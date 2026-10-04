@@ -1,4 +1,4 @@
-#!/usr/bin/env node
+﻿#!/usr/bin/env node
 /**
  * Self-check for this package.
  *
@@ -8,7 +8,7 @@
  *
  *   1. every shipped module parses;
  *   2. the manifest points at files that really exist (`main`, `exports`,
- *      `bin`, `dsh.bundle.patch`) — a broken path here is a profile that will
+ *      `bin`, `dsh.bundle.patch`) 鈥?a broken path here is a profile that will
  *      not boot;
  *   3. the row in `cordis.patch.yml` names this package, or nobody installing it
  *      could resolve that row;
@@ -73,11 +73,17 @@ const extras = run([join(root, 'test', 'report-extras.mjs')])
 if (!extras.ok) failures.push(`the report-extras test failed:\n${extras.output.trim()}`)
 else notes.push(extras.output.trim().split('\n').at(-1) ?? 'report extras ok')
 
-// 5) the row this plugin inserts must name this package: the profile resolves it
+// 5) the watchdog's command-line classification (two measured false alarms live here)
+const classify = run([join(root, 'test', 'watchdog-classify.mjs')])
+if (!classify.ok) failures.push(`the watchdog classification test failed:
+${classify.output.trim()}`)
+else notes.push(classify.output.trim().split('\n').at(-1) ?? 'watchdog classification ok')
+
+// 6) the row this plugin inserts must name this package: the profile resolves it
 // by that string, so a mismatch means nobody who installs it can boot.
 const patch = readFileSync(join(root, 'cordis.patch.yml'), 'utf8')
 if (!patch.includes(`name: '${String(manifest.name)}'`)) {
-  failures.push(`cordis.patch.yml does not insert a row named "${String(manifest.name)}" — the profile could not resolve it and DSH would not boot`)
+  failures.push(`cordis.patch.yml does not insert a row named "${String(manifest.name)}" 鈥?the profile could not resolve it and DSH would not boot`)
 } else {
   notes.push('patch row matches the package name')
 }
